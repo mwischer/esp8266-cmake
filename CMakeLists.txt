@@ -3,6 +3,14 @@ cmake_minimum_required(VERSION 3.5)
 cmake_policy(SET CMP0048 NEW)
 project(ArduinoBuild VERSION 0.9.0 LANGUAGES C CXX ASM)
 
+SET(ARDUINO_ESP8266_DIR "" CACHE PATH "Path to arduino esp8266 board files")
+IF(NOT IS_DIRECTORY "${ARDUINO_ESP8266_DIR}")
+   MESSAGE(WARNING "ARDUINO_ESP8266_DIR needs to be set, have you set the toolchain file?")
+   RETURN()
+ELSE()
+   MESSAGE("ARDUINO_ESP8266_DIR is set to ${ARDUINO_ESP8266_DIR}")
+ENDIF()
+
 add_subdirectory(arduino)
 
 if (EXISTS "${ARDUINO_ESP8266_DIR}/platform.txt")
